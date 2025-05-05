@@ -7,6 +7,7 @@ import { useMutation } from "convex/react";
 import { useEffect } from "react";
 
 export default function Home() {
+
   const { user } = useUser();
   const createUser = useMutation(api.user.createUser);
 
@@ -16,15 +17,14 @@ export default function Home() {
       imageUrl: user?.imageUrl || "",
       name: user?.fullName || "",
     });
-    console.log(result)
+    console.log(result);
   };
-
 
   useEffect(() => {
     if (user) {
       CheckUser();
     }
-   }, [user])
+  }, [user]);
   return (
     <div>
       <h1>This is pankaj and he i great.</h1>
