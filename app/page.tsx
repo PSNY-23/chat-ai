@@ -7,17 +7,15 @@ import { useMutation } from "convex/react";
 import { useCallback, useEffect } from "react";
 
 export default function Home() {
-
   const { user } = useUser();
   const createUser = useMutation(api.user.createUser);
 
   const CheckUser = useCallback(async () => {
-    const result = await createUser({
+    await createUser({
       email: user?.primaryEmailAddress?.emailAddress || "",
       imageUrl: user?.imageUrl || "",
       name: user?.fullName || "",
     });
-    console.log(result);
   }, [createUser, user]);
 
   useEffect(() => {

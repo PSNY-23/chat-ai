@@ -47,7 +47,7 @@ const UploadPdfDialog = ({ children }: { children: React.ReactNode }) => {
     // Step 2: POST the file to the URL
     const result = await fetch(postUrl, {
       method: "POST",
-      headers: { "Content-Type": file?.type },
+      headers: file?.type ? { "Content-Type": file.type } : undefined,
       body: file,
     });
     const { storageId } = await result.json();
@@ -58,8 +58,8 @@ const UploadPdfDialog = ({ children }: { children: React.ReactNode }) => {
       fileId: fileId,
       storageId: storageId,
       fileName: fileName,
-      fileUrl: url,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
+      fileUrl: url || "", // Ensure fileUrl is a non-null string
+      createdBy: user?.primaryEmailAddress?.emailAddress || "unknown",
     };
     const res = await uploadFile(uploadData);
     

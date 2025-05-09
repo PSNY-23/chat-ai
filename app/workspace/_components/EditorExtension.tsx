@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Editor } from "@tiptap/react";
 import {
   Bold,
@@ -16,25 +16,30 @@ import {
   Image as ImageIcon,
   Minus,
   Sparkle,
+  Loader,
 } from "lucide-react";
 import { useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import {  useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { generateAIResponse } from "@/configs/AiMode";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
   const { fileId } = useParams();
   const searchAi = useAction(api.myActions.search);
   const addNotes = useMutation(api.notes.addNotes);
   const { user } = useUser();
-
-  
+  const [aiAnswerSearching, setAiAnswerSearching] = useState<boolean>(false);
 
   if (!editor) return null;
   const onAiClick = async () => {
     const selectedText = editor.state.doc.textBetween(editor.state.selection.from, editor.state.selection.to, " ");
-
+    if (!selectedText) {
+      toast.warning("Select text for searching");
+      return;
+    }
+    setAiAnswerSearching(true);
     const result = await searchAi({
       query: selectedText,
       fileId: fileId as string,
@@ -48,7 +53,6 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
         AllUnformattedAns += item.pageContent;
       });
     }
-    console.log(AllUnformattedAns);
 
     const PROMPT =
       "For question : " +
@@ -81,6 +85,7 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
       fileId: fileId as string,
       createdBy: user?.primaryEmailAddress?.emailAddress || "",
     });
+    setAiAnswerSearching(false);
   };
 
   return (
@@ -185,7 +190,7 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
         <Minus size={18} />
       </button>
       <button onClick={() => onAiClick()} className='btn'>
-        <Sparkle size={18} />
+        {!aiAnswerSearching ? <Sparkle size={18} /> : <Loader size={18} className='animate-spin' />}
       </button>
     </div>
   );

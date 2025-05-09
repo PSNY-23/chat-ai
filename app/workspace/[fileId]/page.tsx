@@ -1,35 +1,30 @@
 "use client";
 
-
-
-
-
+import { useMemo } from "react";
 import { useParams } from "next/navigation";
 import { WorkspaceHeader } from "../_components/workspace-header";
 import { TextEditor } from "../_components/textEditor";
 import { PDFViewer } from "../_components/pdfViewer";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useEffect } from "react";
 
 const WorkspacePage = () => {
+  const params = useParams();
 
-  const { fileId } = useParams();
+  // 👇 Memoize fileId so it doesn't trigger re-renders unnecessarily
+  const fileId = useMemo(() => params.fileId as string, [params.fileId]);
 
+  // 👇 Fetch once with stable fileId
   const fileInfo = useQuery(api.fileStorage.getFileRecord, {
-    fileId: fileId as string,
+    fileId,
   });
-
-  useEffect(() => {
-    console.log("fileInfo: ", fileInfo);
-  }, [fileInfo]);
 
   return (
     <div>
       <WorkspaceHeader />
-      <div className='h-full grid grid-cols-2 gap-2'>
+      <div className="h-full grid grid-cols-2 gap-2">
         <div>
-          <TextEditor fileId={fileId as string} />
+          <TextEditor fileId={fileId} />
         </div>
         <div>
           <PDFViewer fileUrl={fileInfo?.fileUrl || ""} />

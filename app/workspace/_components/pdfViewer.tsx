@@ -3,7 +3,6 @@ import { Loader } from "lucide-react";
 import React, { useState } from "react";
 
 export const PDFViewer = ({ fileUrl }: { fileUrl: string }) => {
-  console.log("reached pdf viewer component")
   const [loaded, setLoaded] = useState(false);
   return (
     <div>

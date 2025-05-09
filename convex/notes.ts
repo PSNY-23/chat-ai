@@ -39,11 +39,11 @@ export const getAllNotes = query({
 
       // Check if result exists and has notes
       if (result.length > 0) {
-        console.log('notes:', result[0].notes); // Log the notes
+        
         return result[0].notes; // Return the notes
       } else {
         // If no notes found, return an empty array or an appropriate message
-        console.log('No notes found for fileId:', args.fileId);
+        
         return []; // or return some default value like null, depending on your use case
       }
     } catch (error) {

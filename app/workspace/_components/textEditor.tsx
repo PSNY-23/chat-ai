@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -62,20 +60,24 @@ export const TextEditor = ({ fileId }: { fileId: string }) => {
     },
   });
 
-
   // get the previous notes from the db
   const allNotes = useQuery(api.notes.getAllNotes, {
     fileId: fileId,
   });
 
+  const [previousNotes, setPreviousNotes] = useState<string | null>(null);
 
   useEffect(() => {
-    editor?.commands.setContent(allNotes);
-  }, [allNotes, editor?.commands]);
+    // Only set the content if the notes are different from the previous ones
+    if (allNotes !== previousNotes && editor) {
+      editor.commands.setContent(allNotes);
+      setPreviousNotes(allNotes);  // Update the stored notes to prevent rerenders
+    }
+  }, [allNotes, previousNotes, editor?.commands, editor]);
 
   return (
     <div className="px-2 flex flex-col h-full">
-      <div className=" mt-1">
+      <div className="mt-1">
         {editor && <EditorExtension editor={editor} />}
       </div>
       <div className="bg-slate-100 border-2 rounded-md flex-1 overflow-y-auto scrollbar-none max-h-[500px]">
