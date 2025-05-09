@@ -27,6 +27,7 @@ const DashboardPage = () => {
   return (
     <div className='py-2 px-6'>
       <h2 className='font-medium text-3xl mb-6'>Workspace</h2>
+      <p>This is dev branch workspace bro</p>
       <div className='grid grid-cols-6 gap-2'>
         {fileList &&
           fileList.map((file, index) => (
