@@ -1,5 +1,5 @@
 "use client";
-import { Loader, Loader2, Loader2Icon, LoaderCircle, LoaderCircleIcon, LoaderPinwheel } from "lucide-react";
+import { Loader } from "lucide-react";
 import React, { useState } from "react";
 
 export const PDFViewer = ({ fileUrl }: { fileUrl: string }) => {

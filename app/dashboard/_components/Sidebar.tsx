@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Layout, PanelLeftClose, PanelLeftOpen, PanelRightOpen, Plus, PlusIcon, Shield } from "lucide-react";
+import { Layout, PanelLeftOpen, PanelRightOpen, Plus, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import UploadPdfDialog from "./UploadPdfDialog";
 import { UserButton, useUser } from "@clerk/nextjs";

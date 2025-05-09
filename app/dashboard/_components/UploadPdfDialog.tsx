@@ -15,7 +15,6 @@ import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useAction, useMutation } from "convex/react";
-import { v } from "convex/values";
 import { Loader } from "lucide-react";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -53,7 +52,7 @@ const UploadPdfDialog = ({ children }: { children: React.ReactNode }) => {
     });
     const { storageId } = await result.json();
     //3. upload this storageId with the other values in the database
-    const { success, url } = await getFileUrl({ storageId });
+    const { url } = await getFileUrl({ storageId });
     const fileId = uuidv4();
     const uploadData = {
       fileId: fileId,

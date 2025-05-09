@@ -22,7 +22,7 @@ const WorkspacePage = () => {
 
   useEffect(() => {
     console.log("fileInfo: ", fileInfo);
-  }, []);
+  }, [fileInfo]);
 
   return (
     <div>

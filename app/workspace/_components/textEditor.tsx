@@ -71,7 +71,7 @@ export const TextEditor = ({ fileId }: { fileId: string }) => {
 
   useEffect(() => {
     editor?.commands.setContent(allNotes);
-  }, [allNotes]);
+  }, [allNotes, editor?.commands]);
 
   return (
     <div className="px-2 flex flex-col h-full">
