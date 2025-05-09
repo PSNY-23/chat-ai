@@ -30,11 +30,26 @@ export const getAllNotes = query({
     fileId: v.string(),
   },
   handler: async (ctx, args) => {
-    const result = await ctx.db
-      .query("notes")
-      .filter((q) => q.eq(q.field("fileId"), args.fileId))
-      .collect();
-    
-    return result[0].notes
+    try {
+      // Fetch the notes based on fileId
+      const result = await ctx.db
+        .query("notes")
+        .filter((q) => q.eq(q.field("fileId"), args.fileId))
+        .collect();
+
+      // Check if result exists and has notes
+      if (result.length > 0) {
+        console.log('notes:', result[0].notes); // Log the notes
+        return result[0].notes; // Return the notes
+      } else {
+        // If no notes found, return an empty array or an appropriate message
+        console.log('No notes found for fileId:', args.fileId);
+        return []; // or return some default value like null, depending on your use case
+      }
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+      throw new Error("Failed to fetch notes.");
+    }
   },
 });
+

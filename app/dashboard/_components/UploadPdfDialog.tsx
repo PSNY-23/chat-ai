@@ -92,7 +92,7 @@ const UploadPdfDialog = ({ children }: { children: React.ReactNode }) => {
     <Dialog open={open}>
       <DialogTrigger asChild>
         <Button onClick={() => setOpen(true)} className='w-full'>
-          + Upload PDF File
+          {children}
         </Button>
       </DialogTrigger>
       <DialogContent>

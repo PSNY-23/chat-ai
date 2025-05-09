@@ -249,3 +249,7 @@
   background: #1f2937;
   color: #fff;
 }
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

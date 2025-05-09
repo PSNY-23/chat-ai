@@ -62,19 +62,23 @@ export const TextEditor = ({ fileId }: { fileId: string }) => {
     },
   });
 
+
   // get the previous notes from the db
   const allNotes = useQuery(api.notes.getAllNotes, {
     fileId: fileId,
   });
+
 
   useEffect(() => {
     editor?.commands.setContent(allNotes);
   }, [allNotes]);
 
   return (
-    <div>
-      {editor && <EditorExtension editor={editor} />}
-      <div>
+    <div className="px-2 flex flex-col h-full">
+      <div className=" mt-1">
+        {editor && <EditorExtension editor={editor} />}
+      </div>
+      <div className="bg-slate-100 border-2 rounded-md flex-1 overflow-y-auto scrollbar-none max-h-[500px]">
         <EditorContent editor={editor} />
       </div>
     </div>
