@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const WorkspaceHeader = () => {
+ 
   return (
     <div className='flex px-6 py-3 items-center justify-between border-b'>
       <div className=''>

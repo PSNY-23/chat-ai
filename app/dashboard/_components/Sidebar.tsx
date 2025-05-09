@@ -73,9 +73,9 @@ const Sidebar = () => {
         <div className='flex gap-3 mt-4 bg-slate-200 rounded-full px-3 py-2 items-center'>
           <UserButton />
           {isOpen && (
-            <div className='leading-tight'>
-              <p className='text-sm font-bold text-gray-700 m-0'>Pankaj</p>
-              <p className='text-xs text-gray-500 m-0'>pankaj@gmail.com</p>
+            <div className='leading-tight overflow-hidden'>
+              <p className='text-sm font-bold text-gray-700 m-0'>{user?.firstName}</p>
+              <p className='text-xs text-gray-500 m-0'>{user?.primaryEmailAddress?.emailAddress}</p>
             </div>
           )}
         </div>
