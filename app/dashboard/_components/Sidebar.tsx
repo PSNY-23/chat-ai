@@ -22,8 +22,8 @@ const Sidebar = () => {
   return (
     <div
       className={clsx(
-        "shadow-md h-screen p-4 border-r transition-all duration-300 flex flex-col justify-between",
-        isOpen ? "w-64" : "w-20"
+        "shadow-md h-screen border-r transition-all duration-300 flex flex-col justify-between",
+        isOpen ? "w-64 p-4" : "w-20 p-4"
       )}
     >
       <div>
