@@ -4,7 +4,7 @@ import Header from "./_components/Header";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-screen flex">
+    <div className='h-screen flex'>
       <div className='max-w-64 h-screen'>
         <Sidebar />
       </div>

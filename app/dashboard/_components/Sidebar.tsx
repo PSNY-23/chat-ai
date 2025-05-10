@@ -10,10 +10,13 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const { user } = useUser();
+  const router = useRouter();
 
   const fileList = useQuery(api.fileStorage.GetUserFiles, {
     createdBy: user?.primaryEmailAddress?.emailAddress as string,
@@ -48,12 +51,20 @@ const Sidebar = () => {
             {isOpen && <span>Upload PDF</span>}
           </UploadPdfDialog>
 
-          <div className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'>
+          <div
+            className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'
+            onClick={() => {
+              toast("Click on the file to move to workspace");
+            }}
+          >
             <Layout />
             {isOpen && <span>Workspace</span>}
           </div>
 
-          <div className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'>
+          <div
+            className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'
+            onClick={() => router.push("/pricing")}
+          >
             <Shield />
             {isOpen && <span>Upgrade</span>}
           </div>

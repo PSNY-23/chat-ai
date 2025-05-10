@@ -2,11 +2,11 @@
 
 import { useMemo } from "react";
 import { useParams } from "next/navigation";
-import { WorkspaceHeader } from "../_components/workspace-header";
 import { TextEditor } from "../_components/textEditor";
 import { PDFViewer } from "../_components/pdfViewer";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import {Header} from "@/components/Header"
 
 const WorkspacePage = () => {
   const params = useParams();
@@ -21,7 +21,7 @@ const WorkspacePage = () => {
 
   return (
     <div>
-      <WorkspaceHeader />
+      <Header />
       <div className="h-full grid grid-cols-2 gap-2">
         <div>
           <TextEditor fileId={fileId} />

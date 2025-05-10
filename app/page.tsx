@@ -1,33 +1,63 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
-import { UserButton, useUser } from "@clerk/nextjs";
-import { useMutation } from "convex/react";
-import { useCallback, useEffect } from "react";
+import { Header } from "@/components/Header";
+import { PricingPreview } from "@/components/pricing-preview";
+
+//static component imports
+import Hero from "@/components/static/Hero";
+import Brand from "@/components/static/Brand";
+import Stats from "@/components/static/stats";
+import { Features } from "@/components/static/features";
+import { HowItWorks } from "@/components/static/HowItWorks";
+import { Testimonials } from "@/components/static/Testimonials";
+import CallToAction from "@/components/static/CallToAction";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import VerticalGlass from "@/components/fun-experiments/verticalGlass";
+import { HorizontalGlass } from "@/components/fun-experiments/horizontalGlass";
 
 export default function Home() {
-  const { user } = useUser();
-  const createUser = useMutation(api.user.createUser);
-
-  const CheckUser = useCallback(async () => {
-    await createUser({
-      email: user?.primaryEmailAddress?.emailAddress || "",
-      imageUrl: user?.imageUrl || "",
-      name: user?.fullName || "",
-    });
-  }, [createUser, user]);
-
+  const router = useRouter();
+  const { isLoaded, user } = useUser();
   useEffect(() => {
-    if (user) {
-      CheckUser();
+    if (isLoaded && user) {
+      router.push("/dashboard");
     }
-  }, [CheckUser, user]);
+  }, [user, isLoaded, router]);
+
+  if (!isLoaded) return null; // or a loading spinner
+
+  if (user) return null;
+
   return (
-    <div>
-      <h1>This is pankaj and he i great.</h1>
-      <Button>YEs i am button</Button>
-      <UserButton />
-    </div>
+    <>
+      <div className='relative flex flex-col min-h-screen bg-slate-100'>
+        <Header />
+        {/* Hero Section */}
+        <Hero />
+
+        {/* Brands Section */}
+        <Brand />
+
+        {/* Stats Section */}
+        <Stats />
+        {/* Features Section */}
+        <Features />
+        {/* How It Works Section */}
+        <HowItWorks />
+
+        {/* Pricing Preview Section */}
+        <PricingPreview />
+
+        {/* Testimonials Section */}
+        <Testimonials />
+
+        {/* CTA Section */}
+        <CallToAction />
+        <HorizontalGlass duration={10} className='' />
+        <VerticalGlass duration={20} className="bg-transparent"/>
+      </div>
+    </>
   );
 }
