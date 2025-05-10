@@ -31,7 +31,7 @@ export function TestimonialCard({ quote, author, role, rating = 5, image }: Test
             }
           })}
         </div>
-        <div className="mb-4 text-4xl text-black/30 dark:text-white/30">"</div>
+        <div className="mb-4 text-4xl text-black/30 dark:text-white/30"></div>
         <p className="text-muted-foreground">{quote}</p>
       </CardContent>
       <CardFooter className="border-t pt-4">

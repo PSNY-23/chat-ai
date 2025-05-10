@@ -10,7 +10,6 @@ import {
   Heading2,
   Quote,
   Code,
-  List,
   ListOrdered,
   Link as LinkIcon,
   Image as ImageIcon,
@@ -54,15 +53,41 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
       });
     }
 
-    const PROMPT =
-      "For question : " +
-      selectedText +
-      " and with the given content as answer," +
-      " please give appropritate answer in HTML format. The answer content is: " +
-      AllUnformattedAns;
+    const PROMPT = `
+You are a helpful, friendly, and intelligent tutor in a student-facing chat application.
+
+Your job is to answer questions **based primarily on the provided content from a PDF**.
+
+**Important behavior guidelines:**
+1. Respond as if you're directly helping the student (the end-user), not a developer.
+2. Always return your response in clean and simple **HTML format** suitable for rendering in the UI.
+3. **Do NOT mention technical issues** like "HTML doesn't exist", "null", "undefined", or programming bugs.
+4. Never say things like "I'm an AI" or "As an AI model..." — respond like a confident human tutor.
+5. If the answer is clearly found in the provided content, extract and present it clearly.
+6. If the answer is **not found in the PDF content**, say:
+   <b>The relevant result is not available in the PDF.</b> 
+   Then, **optionally provide a helpful general explanation or answer from outside knowledge**, but only if it's accurate and easy to understand.
+7. Always **end with a follow-up question or suggestion**, like:
+   <i>Would you like help with another topic?</i> or 
+   <i>Shall I explain something else for you?</i>
+
+Your tone should be:
+- Friendly and calm
+- Supportive like a real tutor
+- Easy to understand (avoid jargon)
+- Confident and helpful
+
+---
+
+Here is the question: ${selectedText}
+
+Here is the extracted content from the PDF to use as your main source: ${AllUnformattedAns}
+
+Now, please generate the final response in HTML format following all the instructions above.
+`;
 
     const aiModelResult = await generateAIResponse(PROMPT);
-
+    console.log("aiModelResult =", aiModelResult);
     /// formating the things with ai because we are gtting an array of html parts
     const htmlString = aiModelResult
       .join("") // Join the chunks
@@ -142,12 +167,7 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
       >
         <Code />
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive("bulletList") ? "btn-active" : "btn"}
-      >
-        <List size={18} />
-      </button>
+
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive("orderedList") ? "btn-active" : "btn"}
@@ -189,8 +209,12 @@ export const EditorExtension = ({ editor }: { editor: Editor | null }) => {
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()} className='btn'>
         <Minus size={18} />
       </button>
-      <button onClick={() => onAiClick()} className='btn'>
-        {!aiAnswerSearching ? <Sparkle size={18} /> : <Loader size={18} className='animate-spin' />}
+      <button onClick={() => onAiClick()} className='btn border border-[#F97316]  shadow-inner'>
+        {!aiAnswerSearching ? (
+          <Sparkle size={18} className='text-[#F97316]' />
+        ) : (
+          <Loader size={18} className='animate-spin' />
+        )}
       </button>
     </div>
   );

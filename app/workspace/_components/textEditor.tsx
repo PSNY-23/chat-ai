@@ -28,14 +28,19 @@ import { EditorExtension } from "../_components/EditorExtension";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-export const TextEditor = ({ fileId }: { fileId: string }) => {
+interface TextEditorProps {
+  fileId: string;
+  
+}
+
+export const TextEditor = ({ fileId }: TextEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
         codeBlock: false,
       }),
       Placeholder.configure({
-        placeholder: "Start taking your notes here...",
+        placeholder: "Write question, select, press spinner(AI) button above",
       }),
       Underline,
       Link.configure({
@@ -71,16 +76,14 @@ export const TextEditor = ({ fileId }: { fileId: string }) => {
     // Only set the content if the notes are different from the previous ones
     if (allNotes !== previousNotes && editor) {
       editor.commands.setContent(allNotes);
-      setPreviousNotes(allNotes);  // Update the stored notes to prevent rerenders
+      setPreviousNotes(allNotes); // Update the stored notes to prevent rerenders
     }
   }, [allNotes, previousNotes, editor?.commands, editor]);
 
   return (
-    <div className="px-2 flex flex-col h-full">
-      <div className="mt-1">
-        {editor && <EditorExtension editor={editor} />}
-      </div>
-      <div className="bg-slate-100 border-2 rounded-md flex-1 overflow-y-auto scrollbar-none max-h-[500px]">
+    <div className='px-2 flex flex-col h-full'>
+      <div className='mt-1'>{editor && <EditorExtension editor={editor} />}</div>
+      <div className='bg-slate-100 border-2 rounded-md flex-1 overflow-y-auto scrollbar-none max-h-[500px]'>
         <EditorContent editor={editor} />
       </div>
     </div>
