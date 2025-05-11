@@ -12,9 +12,14 @@ type Message = {
   content: string;
 };
 
-const ChatBox = () => {
+interface ChatBoxProps {
+  fileId: string;
+}
+
+const ChatBox = ({ fileId }: ChatBoxProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  console.log("fileId: ", fileId);
 
   const sendMessage = () => {
     if (!input.trim()) return;
