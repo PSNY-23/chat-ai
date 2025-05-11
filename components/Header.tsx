@@ -13,14 +13,14 @@ export const Header = () => {
       <div className='flex px-6 py-2 items-center justify-between border-b'>
         <div className=''>
           <Link href='/dashboard' className='flex justify-start items-center'>
-            <Image src={"/logo.svg"} alt='logo' width={48} height={48} className='hover:animate-spin' />
-            <span className='text-3xl font-bold'>ChatAI</span>
+            <Image src={"/logo.svg"} alt='logo' width={48} height={48} className='hover:animate-spin max-sm:w-8 max-sm:h-8' />
+            <span className='text-xl md:text-3xl  font-bold'>ChatAI</span>
           </Link>
         </div>
         <div className='flex gap-6'>
           <div className=' flex items-center justify-center'>
             <div className='flex items-center gap-4'>
-              <div className='flex gap-4'>
+              <div className='flex gap-4 max-md:hidden'>
                 <Link href='https://github.com/PSNY-23/chat-ai'>
                   <Button variant='outline' className='cursor-pointer'>
                     <FaGithub className='' />

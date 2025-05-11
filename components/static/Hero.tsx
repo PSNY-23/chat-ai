@@ -9,7 +9,7 @@ import { HorizontalGlass } from "../fun-experiments/horizontalGlass";
 
 const Hero = () => {
   return (
-    <section className='relative w-full py-12 md:py-24 lg:py-32 overflow-hidden'>
+    <section className='relative w-full py-12 max-sm:mt-8 md:py-24 lg:py-32 overflow-hidden'>
       <div className='container px-4 md:px-6'>
         <div className='grid gap-6 lg:grid-cols-2 lg:gap-12 items-center'>
           <div className='relative flex flex-col justify-center space-y-4'>
@@ -41,7 +41,7 @@ const Hero = () => {
             </div>
 
             <div className='flex items-center gap-4 pt-4'>
-              <div className='flex -space-x-2'>
+              <div className='flex -space-x-2 max-sm:hidden'>
                 <TooltipProvider>
                   {users.map((user) => (
                     <Tooltip key={user.id}>

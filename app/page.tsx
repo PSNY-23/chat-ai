@@ -56,7 +56,7 @@ export default function Home() {
         {/* CTA Section */}
         <CallToAction />
         <HorizontalGlass duration={10} className='' />
-        <VerticalGlass duration={20} className="bg-transparent"/>
+        <VerticalGlass duration={20} className="bg-transparent hidden md:block"/>
       </div>
     </>
   );
