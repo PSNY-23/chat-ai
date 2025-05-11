@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 export const Header = () => {
- 
   return (
     <div className='fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm'>
       <div className='flex px-6 py-2 items-center justify-between border-b'>
@@ -17,22 +17,23 @@ export const Header = () => {
           </Link>
         </div>
         <div className='flex gap-6'>
-         
-          <div className='scale-130 flex items-center justify-center pr-6'>
+          <div className=' flex items-center justify-center'>
             <div className='flex items-center gap-4'>
+              <div className="">
+                <ModeToggle />
+              </div>
               <SignedOut>
                 <SignInButton>
-                  <Button size='sm' className='text-sm' variant="default">
+                  <Button size='sm' className='text-sm' variant='default'>
                     Sign In
                   </Button>
                 </SignInButton>
                 <SignUpButton>
-                  <Button size='sm' variant="outline" className='text-sm'>
+                  <Button size='sm' variant='outline' className='text-sm'>
                     Sign Up
                   </Button>
                 </SignUpButton>
               </SignedOut>
-              
             </div>
           </div>
         </div>
