@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Layout, PanelLeftOpen, PanelRightOpen, Plus, Shield } from "lucide-react";
+import { Folder, Layout, PanelLeftOpen, PanelRightOpen, Plus, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import UploadPdfDialog from "./UploadPdfDialog";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -50,6 +50,16 @@ const Sidebar = () => {
             <Plus />
             {isOpen && <span>Upload PDF</span>}
           </UploadPdfDialog>
+
+          <div
+            className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'
+            onClick={() => {
+              router.push("/dashboard")
+            }}
+          >
+            <Folder />
+            {isOpen && <span>My Files</span>}
+          </div>
 
           <div
             className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'

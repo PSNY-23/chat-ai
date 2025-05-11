@@ -16,7 +16,7 @@ export const uploadFile = mutation({
     createdBy: v.string(),
   },
   handler: async (ctx, args) => {
-    const result = await ctx.db.insert("pdfFiles", {
+     await ctx.db.insert("pdfFiles", {
       fileId: args.fileId,
       fileName: args.fileName,
       fileUrl: args.fileUrl,
@@ -63,5 +63,18 @@ export const GetUserFiles = query({
       .filter((q) => q.eq(q.field("createdBy"), args?.createdBy))
       .collect();
     return result;
+  },
+});
+
+export const deleteFile = mutation({
+  args: { fileId: v.string() },
+  handler: async (ctx, args) => {
+    const record = await ctx.db
+      .query("pdfFiles")
+      .filter((q) => q.eq(q.field("fileId"), args.fileId))
+      .collect();
+    if (record.length > 0) {
+      await ctx.db.delete(record[0]._id);
+    }
   },
 });

@@ -125,7 +125,7 @@ const UploadPdfDialog = ({ children }: { children: React.ReactNode }) => {
         </DialogHeader>
         <DialogFooter className='sm:justify-end'>
           <DialogClose asChild>
-            <Button type='button' variant='secondary' disabled={loading}>
+            <Button type='button' variant='secondary' disabled={loading} onClick={()=>setOpen(false)}>
               Close
             </Button>
           </DialogClose>
