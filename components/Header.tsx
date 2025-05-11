@@ -5,6 +5,7 @@ import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
+import { FaGithub } from "react-icons/fa";
 
 export const Header = () => {
   return (
@@ -19,7 +20,13 @@ export const Header = () => {
         <div className='flex gap-6'>
           <div className=' flex items-center justify-center'>
             <div className='flex items-center gap-4'>
-              <div className="">
+              <div className='flex gap-4'>
+                <Link href='https://github.com/PSNY-23/chat-ai'>
+                  <Button variant='outline' className='cursor-pointer'>
+                    <FaGithub className='' />
+                  </Button>
+                </Link>
+
                 <ModeToggle />
               </div>
               <SignedOut>
