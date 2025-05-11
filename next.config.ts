@@ -4,9 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'randomuser.me' },
-      { protocol: 'https', hostname: 'upload.wikimedia.org' },
-      { protocol: 'https', hostname: 'uploads-ssl.webflow.com' }
+      { protocol: "https", hostname: "randomuser.me", pathname: "/api/portraits/**" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+      { protocol: "https", hostname: "uploads-ssl.webflow.com" },
     ],
   },
 };
