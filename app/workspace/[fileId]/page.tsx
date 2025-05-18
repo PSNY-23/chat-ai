@@ -7,7 +7,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import EditorPage from "./@editor/page";
 import ChatPage from "./@chat/page";
-import Sidebar from "@/app/dashboard/_components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 
 const WorkspacePage = () => {

@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Folder, Layout, PanelLeftOpen, PanelRightOpen, Plus, Shield } from "lucide-react";
+import { Folder, Layout, MessageSquareMore, PanelLeftOpen, PanelRightOpen, Plus, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import UploadPdfDialog from "./UploadPdfDialog";
+import UploadPdfDialog from "@/components/UploadPdfDialog";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -77,6 +77,13 @@ const Sidebar = () => {
           >
             <Shield />
             {isOpen && <span>Upgrade</span>}
+          </div>
+          <div
+            className='flex gap-3 items-center p-3 hover:bg-slate-100 rounded-lg cursor-pointer'
+            onClick={() => router.push("/pricing")}
+          >
+            <MessageSquareMore />
+            {isOpen && <span>Friend</span>}
           </div>
         </div>
       </div>

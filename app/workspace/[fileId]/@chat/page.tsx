@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "sonner";
 
 type Message = {
   id: number;
@@ -17,12 +18,16 @@ interface ChatBoxProps {
 }
 
 const ChatBox = ({ fileId }: ChatBoxProps) => {
+  
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   console.log("fileId: ", fileId);
 
   const sendMessage = () => {
-    if (!input.trim()) return;
+    if (!input.trim()) {
+      toast.error("Type something to search");
+      return;
+    }
 
     const userMsg: Message = {
       id: Date.now(),
