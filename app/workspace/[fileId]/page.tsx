@@ -10,9 +10,12 @@ import ChatPage from "./@chat/page";
 import Sidebar from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 
+import { CustomAiModal } from "@/components/customize-ai-modal";
+
 const WorkspacePage = () => {
   const params = useParams();
-  const [mode, setMode] = useState<"chat" | "note" | "">("note");
+  const [mode, setMode] = useState<"chat" | "note" | "">("chat");
+  const [isCustomAiModalOpen, setIsCustomAiMoalOpen] = useState<boolean>(false);
 
   // 👇 Memoize fileId so it doesn't trigger re-renders unnecessarily
   const fileId = useMemo(() => params.fileId as string, [params.fileId]);
@@ -38,7 +41,11 @@ const WorkspacePage = () => {
         <div>
           <div className='flex justify-between items-center ml-1 px-2 mb-1'>
             <p className='text-sm font-semibold'>Current View: {mode}</p>
-            <Button onClick={handleChangeMode}>Switch to {mode === "chat" ? "Note" : "Chat"}</Button>
+            <div className="flex gap-2">
+              <Button variant="outline" className="shadow-md" onClick={() => setIsCustomAiMoalOpen(true)}>Customize AI</Button>
+              <CustomAiModal open={isCustomAiModalOpen} onOpenChange={setIsCustomAiMoalOpen} />
+              <Button onClick={handleChangeMode}>Switch to {mode === "chat" ? "Note" : "Chat"}</Button>
+            </div>
           </div>
           {mode === "note" ? <EditorPage fileId={fileId} /> : <ChatPage fileId={fileId} />}
         </div>

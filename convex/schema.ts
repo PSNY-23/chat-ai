@@ -26,6 +26,7 @@ export default defineSchema({
     fileId: v.string(),
     notes: v.any(),
     createdBy: v.string()
-  })
+  }),
+  
 
 });
