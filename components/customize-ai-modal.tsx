@@ -9,17 +9,10 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 type CustomAiModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSave: (data: {
-    name: string;
-    role: string;
-    experience: string;
-    tone: string;
-    description: string;
-    language: string;
-  }) => void;
+  
 };
 
-export const CustomAiModal = ({ open, onOpenChange, onSave }: CustomAiModalProps) => {
+export const CustomAiModal = ({ open, onOpenChange }: CustomAiModalProps) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [experience, setExperience] = useState("");

@@ -33,6 +33,8 @@ const WorkspacePage = () => {
     }
   };
 
+  
+
   return (
     <div className='flex'>
       <Sidebar />
@@ -43,7 +45,7 @@ const WorkspacePage = () => {
             <p className='text-sm font-semibold'>Current View: {mode}</p>
             <div className="flex gap-2">
               <Button variant="outline" className="shadow-md" onClick={() => setIsCustomAiMoalOpen(true)}>Customize AI</Button>
-              <CustomAiModal open={isCustomAiModalOpen} onOpenChange={setIsCustomAiMoalOpen} />
+              <CustomAiModal open={isCustomAiModalOpen} onOpenChange={setIsCustomAiMoalOpen}  />
               <Button onClick={handleChangeMode}>Switch to {mode === "chat" ? "Note" : "Chat"}</Button>
             </div>
           </div>
